@@ -1,18 +1,28 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1.0">
+    <meta charset="utf-8">
     <title>
         Bus Stop Test
     </title>
+    <link rel="stylesheet" href="style.css" />
 </head>
-<body ng-app="busStop">
-    
+<body ng-app="busStop" ng-cloak>
+    <ng-include src="'app/home/index.html'"></ng-include>
 
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.5/angular.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.5/angular-animate.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.5/angular-aria.min.js"></script>
 
-    <script src="Scripts/app.module.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD_KQCO2V8fy9lys8-Tso9KfAIz10FY5dc"></script>
+
+    <!--Modules-->
+    <script src="app/app.module.js"></script>
+    <script src="app/home/home.module.js"></script>
+
+    <!--Home-->
+    <script src="app/home/home.controller.js"></script>
+    <script src="app/home/home.factory.js"></script>
 </body>
 </html>
