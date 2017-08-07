@@ -1,4 +1,56 @@
 ﻿<section ng-controller="home_controller as vm">
-    <div id="map">
+    <div class="row">
+        <div class="col-sm-3 col-xs-12">
+            <div>
+                <i class="fa" ng-class="{ 'fa-spinner fa-spin' : vm.loading, 'fa-bus' : !vm.loading }"></i>
+                <b>{{ vm.loading ? 'Loading Application, please wait..' : 'London Bus Stops' }}</b>
+            </div>
+            <div ng-if="!vm.loading">
+                <div>
+                    <select class="form-control input-sm" 
+                            ng-model="vm.selectedStop" 
+                            ng-options="stop as (stop.stop_name + ' - ' + stop.atcocode) for stop in vm.stops | orderBy:'stop_name'"
+                            ng-change="vm.getSchedule()">
+
+                    </select>
+                </div>
+                <br />
+                <div ng-if="vm.selectedStop.name">
+                    {{vm.selectedStop.name}} <i class="fa fa-spin fa-spinner" ng-show="vm.departures.length == 0"></i>
+                    <table class="table table-condensed table-striped">
+                        <thead>
+                            <tr>
+                                <th>
+                                    Departure
+                                </th>
+                                <th>
+                                    Direction
+                                </th>
+                                <th>
+                                    Operator
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="departure in vm.departures | orderBy:'expected_departure_time'">
+                                <td>
+                                    {{departure.expected_departure_time}}
+                                </td>
+                                <td>
+                                    {{departure.direction}}
+                                </td>
+                                <td>
+                                    {{departure.operator}}
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>            
+        </div>
+        <div class="col-sm-9 col-xs-12">
+            <div id="map">
+            </div>
+        </div>
     </div>
 </section>

@@ -10,12 +10,12 @@
             getDeparture: getDeparture
         };
 
-        var api_key = 'a3f39b8e8c07f321f5e17ccf61968330',
-            app_id = '8aa62f8c';
+        var api_key = '14b5440fad58eebcec0983251e4c5440',
+            app_id = 'c1afadf1';
 
         return service;
 
-        function getStops(minlon, minlat, maxlon, maxlat) {
+        function getStops(minlon, minlat, maxlon, maxlat, page) {
             return $http({
                 method: "GET",
                 contentType: 'application/json',
@@ -28,7 +28,7 @@
                     maxlat: maxlat,
                     api_key: api_key,
                     app_id: app_id,
-                    page: 2
+                    page: page
                 }
             });
         }
@@ -40,7 +40,7 @@
                 url: 'http://transportapi.com/v3/uk/bus/stop/' + atcocode + '/live.json',
                 responseType: 'json',
                 params: {
-                    group: route,
+                    group: 'route',
                     api_key: api_key,
                     app_id: app_id
                 }
