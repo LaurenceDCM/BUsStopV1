@@ -71,6 +71,7 @@
                     tasks.push(home_factory.getStops(-0.350005, 51.365085, 0.131648, 51.616129, i));
                 }
 
+                /* Retrieve pending stops since API has max page size of 25 */                
                 $q.all(tasks).then(function (taskResp) {
                     angular.forEach(taskResp, function (val) {
                         val.data.stops.forEach(function (e) {
