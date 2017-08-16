@@ -10,7 +10,7 @@
         vm.loading = true;
         vm.selectedStop = {};
         vm.getSchedule = getSchedule;
-        vm.departures = [];
+        vm.departures = null;
 
         activate();
 
@@ -28,7 +28,7 @@
                 markers = [];
             }
 
-            vm.departures = [];
+            vm.departures = null;
 
             var stop = angular.copy(vm.selectedStop);
 
@@ -49,6 +49,7 @@
             });
 
             home_factory.getDeparture(stop.atcocode).then(function (resp) {
+                vm.departures = [];
                 angular.forEach(resp.data.departures, function (val, key) {
                     val.forEach(function (e) {
                         vm.departures.push(e);
@@ -59,15 +60,17 @@
 
         function activate() {
             home_factory.getStops(-0.350005, 51.365085, 0.131648, 51.616129, 1).then(function(resp) {
-                vm.stops = resp.data.stops;
-
-                vm.loading = false;
+                vm.stops = resp.data.stops;                
 
                 var tasks = [];
 
                 var total = Math.ceil(resp.data.total / 25);
 
-                for (var i = 2; i <= total; i++) {
+                /*
+                *  Opted to go for initial load over lazy loading (auto-complete etc) with max page 100
+                *  or ~2,500 stops for demo purposes only.
+                */
+                for (var i = 2; i <= total && i <= 100; i++) {
                     tasks.push(home_factory.getStops(-0.350005, 51.365085, 0.131648, 51.616129, i));
                 }
 
@@ -77,8 +80,12 @@
                         val.data.stops.forEach(function (e) {
                             vm.stops.push(e);
                         });
+
+                        vm.loading = false;
                     });
                 });                               
+            }, function (err) {
+                alert('API Load Error: ' + err);
             });
         }
     }

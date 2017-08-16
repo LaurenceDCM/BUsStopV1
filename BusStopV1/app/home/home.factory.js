@@ -10,6 +10,7 @@
             getDeparture: getDeparture
         };
 
+        /* Replace this with your App ID and API Key */
         var api_key = '14b5440fad58eebcec0983251e4c5440',
             app_id = 'c1afadf1';
 

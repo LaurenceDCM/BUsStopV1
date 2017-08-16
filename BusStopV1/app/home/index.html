@@ -16,7 +16,7 @@
                 </div>
                 <br />
                 <div ng-if="vm.selectedStop.name">
-                    {{vm.selectedStop.name}} <i class="fa fa-spin fa-spinner" ng-show="vm.departures.length == 0"></i>
+                    {{vm.selectedStop.name}} <i class="fa fa-spin fa-spinner" ng-show="vm.departures == null"></i>
                     <table class="table table-condensed table-striped">
                         <thead>
                             <tr>
